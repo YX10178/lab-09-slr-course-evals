@@ -37,6 +37,8 @@ library(openintro)
 
 ```{r 1}
 data(evals)
+ggplot (evals, aes (x=score))+
+  geom_line 
 ```
 
 ```{r 2}
