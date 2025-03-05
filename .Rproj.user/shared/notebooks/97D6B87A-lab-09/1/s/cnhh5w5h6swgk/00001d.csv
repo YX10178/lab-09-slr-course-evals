@@ -1,0 +1,5 @@
+"0","library(tidyverse) "
+"0","library(tidymodels)"
+"2","Error: package or namespace load failed for ‘tidymodels’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ namespace ‘cli’ 3.6.3 is already loaded, but >= 3.6.4 is required
+"
