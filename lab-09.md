@@ -174,6 +174,195 @@ summary(m_bty)$r.squared
 ## Exercise Part 3
 
 ``` r
+summary (evals$gender)
+```
+
+    ## female   male 
+    ##    195    268
+
+``` r
+m_gen<-lm(score~gender, data=evals)
+summary (m_gen)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = score ~ gender, data = evals)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -1.83433 -0.36357  0.06567  0.40718  0.90718 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)  4.09282    0.03867 105.852  < 2e-16 ***
+    ## gendermale   0.14151    0.05082   2.784  0.00558 ** 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.5399 on 461 degrees of freedom
+    ## Multiple R-squared:  0.01654,    Adjusted R-squared:  0.01441 
+    ## F-statistic: 7.753 on 1 and 461 DF,  p-value: 0.005583
+
+``` r
+#intercept 4.09
+#slope 0.14 
+# score  = 0.14 gendermale + 4.09
+# on average, female professors receive a course evaluation score of 4.09.
+# on avgerage, male professors (genderMale = 1) receive scores that are 0.14 points higher than female professors. 
+```
+
+``` r
+# the predicted course evaluation score for female professors is 4.09.
+# Equation for female professors: predicted score = 4.09
+# the predicted course evaluation score for male professors is 4.23. 
+# Equation for male professors: predicted score = 4.23
+```
+
+``` r
+summary (evals$rank)
+```
+
+    ##     teaching tenure track      tenured 
+    ##          102          108          253
+
+``` r
+m_rank<-lm(score~rank, data=evals)
+summary (m_rank)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = score ~ rank, data = evals)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -1.8546 -0.3391  0.1157  0.4305  0.8609 
+    ## 
+    ## Coefficients:
+    ##                  Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)       4.28431    0.05365  79.853   <2e-16 ***
+    ## ranktenure track -0.12968    0.07482  -1.733   0.0837 .  
+    ## ranktenured      -0.14518    0.06355  -2.284   0.0228 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.5419 on 460 degrees of freedom
+    ## Multiple R-squared:  0.01163,    Adjusted R-squared:  0.007332 
+    ## F-statistic: 2.706 on 2 and 460 DF,  p-value: 0.06786
+
+``` r
+#intercept 4.28
+#slope for tenure track -0.13
+#slope for tenured  -0.15 
+
+# expected score  = -0.15 tenured + (-0.13) tenuretrack + 4.28
+
+# on average, teaching professors receive a course evaluation score of 4.28.
+# on avgerage, tenured professors have an expected evaluation score of 4.13.
+# on avgerage, tenure-track professors have an expected evaluation score of 4.15.
+```
+
+``` r
+#Create a new variable called rank_relevel where "tenure track" is the baseline level.
 ## Hint
 #For Exercise 12, the `relevel()` function can be helpful!
+rank_relevel<-relevel(evals$rank, ref = "tenure track")
+```
+
+``` r
+m_rank_relevel<-lm(score~rank_relevel, data=evals)
+summary (m_rank_relevel)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = score ~ rank_relevel, data = evals)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -1.8546 -0.3391  0.1157  0.4305  0.8609 
+    ## 
+    ## Coefficients:
+    ##                      Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)           4.15463    0.05214  79.680   <2e-16 ***
+    ## rank_relevelteaching  0.12968    0.07482   1.733   0.0837 .  
+    ## rank_releveltenured  -0.01550    0.06228  -0.249   0.8036    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.5419 on 460 degrees of freedom
+    ## Multiple R-squared:  0.01163,    Adjusted R-squared:  0.007332 
+    ## F-statistic: 2.706 on 2 and 460 DF,  p-value: 0.06786
+
+``` r
+#intercept 4.15
+#slope for teaching professor 0.13
+#slope for tenured  -0.02 
+
+# expected score  = -0.02 tenured + 0.13 teaching + 4.15
+
+# on average, teaching professors receive a course evaluation score of 4.15+0.13=4.28.
+# on avgerage, tenured professors have an expected evaluation score of 4.15-0.02=4.13.
+# on avgerage, tenure-track professors have an expected evaluation score of 4.15.
+
+summary(m_rank_relevel)$r.squared
+```
+
+    ## [1] 0.01162894
+
+``` r
+# r.squared = 0.01
+# only 1% of the variability in course evaluation scores is explained by professor rank (tenured, teaching, tenure-track).
+```
+
+``` r
+evals <- evals %>%
+  mutate(tenure_eligible = ifelse(rank == "teaching", "no", "yes"))
+```
+
+``` r
+m_tenure_eligible<-lm(score~tenure_eligible, data=evals)
+summary (m_tenure_eligible)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = score ~ tenure_eligible, data = evals)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -1.8438 -0.3438  0.1157  0.4360  0.8562 
+    ## 
+    ## Coefficients:
+    ##                    Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)          4.2843     0.0536  79.934   <2e-16 ***
+    ## tenure_eligibleyes  -0.1406     0.0607  -2.315    0.021 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.5413 on 461 degrees of freedom
+    ## Multiple R-squared:  0.0115, Adjusted R-squared:  0.009352 
+    ## F-statistic: 5.361 on 1 and 461 DF,  p-value: 0.02103
+
+``` r
+#intercept 4.28
+#slope for tenure_eligibleyes -0.14
+
+
+# expected score  = -0.14 tenure_eligibleyes + 4.28
+
+# on average, teaching professors receive a course evaluation score of 4.28.
+# on avgerage, tenured and tenure tracking professors have an expected evaluation score of 4.28-0.14 = 4.14
+# on average,the rating scores for teaching professors is 0.14 unit higher than for tenured and tenure tracking professors. 
+
+
+summary(m_tenure_eligible)$r.squared
+```
+
+    ## [1] 0.01149589
+
+``` r
+# r.squared = 0.01
+# Only 1% of the variability in course evaluation scores is explained by tenure eligibility.
 ```

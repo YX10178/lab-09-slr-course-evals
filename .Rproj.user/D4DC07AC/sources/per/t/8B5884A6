@@ -3,7 +3,7 @@
     "path": "~/Desktop/datascience/lab-09-slr-course-evals/lab-09.Rmd",
     "project_path": "lab-09.Rmd",
     "type": "r_markdown",
-    "hash": "1696720733",
+    "hash": "1543877010",
     "contents": "",
     "dirty": false,
     "created": 1741183774137.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "110,123",
-        "scrollLine": "107"
+        "cursorPosition": "197,92",
+        "scrollLine": "187"
     },
     "folds": "",
-    "lastKnownWriteTime": 1741287166,
+    "lastKnownWriteTime": 1741289078,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1741287166306,
+    "last_content_update": 1741289078361,
     "read_only": false,
     "read_only_alternatives": []
 }

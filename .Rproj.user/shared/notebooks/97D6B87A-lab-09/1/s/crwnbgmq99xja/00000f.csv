@@ -1,0 +1,2 @@
+"0","evals <- evals %>%"
+"0","  mutate(tenure_eligible = ifelse(rank == ""teaching"", ""no"", ""yes""))"

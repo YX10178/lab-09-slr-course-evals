@@ -1,0 +1,5 @@
+"0","#Create a new variable called rank_relevel where ""tenure track"" is the baseline level."
+"0","## Hint"
+"0","#For Exercise 12, the `relevel()` function can be helpful!"
+"0","rank_relevel<-relevel(evals$rank, ref = ""tenure track"")"
+"0",""
