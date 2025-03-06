@@ -1,0 +1,8 @@
+"0","# the relationship between score and the variable bty_avg, a professor’s average beauty rating."
+"0","ggplot(evals, aes(x = bty_avg, y = score)) +"
+"0","  geom_point(alpha = 0.5, color = ""steelblue"") +  # Scatter points"
+"0","  geom_smooth(method = ""lm"", color = ""red"", se = TRUE) +  # Regression line"
+"0","  labs(title = ""Relationship Between Beauty Rating and Course Score"","
+"0","       x = ""Professor's Average Beauty Rating (bty_avg)"","
+"0","       y = ""Course Evaluation Score"") +"
+"0","  theme_minimal()"
